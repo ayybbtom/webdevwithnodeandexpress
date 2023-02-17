@@ -69,6 +69,7 @@ app.get('/', (req, res) => res.render('home'))
 //   const randomFortune = fortunes[Math.floor(Math.random()*fortunes.length)]
 //   res.render('about', {fortune: randomFortune})
 // })
+// removed the above, and removed below fortunes variable into making it a module
 
 app.get('/about', (req, res) => {
   res.render('about', { fortune: fortune.getFortune()})
