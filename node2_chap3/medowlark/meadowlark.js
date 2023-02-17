@@ -4,7 +4,6 @@
 //added for express
 //adding this handlebars line after we install
 //then adding/configure Handlebars view engine
-
 const express = require('express')
 //newer in handlebars, needed the below
 // const expressHandlebars = require('express-handlebars') does not work
@@ -16,6 +15,7 @@ const express = require('express')
 // const { engine: expressHandlebars } = require('express-handlebars')
 const { engine: expressHandlebars } = require('express-handlebars')
 
+const fortune = require('./lib/fortune.js')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -65,9 +65,13 @@ app.use(express.static(__dirname + '/public'))
 
 app.get('/', (req, res) => res.render('home'))
 
+// app.get('/about', (req, res) => {
+//   const randomFortune = fortunes[Math.floor(Math.random()*fortunes.length)]
+//   res.render('about', {fortune: randomFortune})
+// })
+
 app.get('/about', (req, res) => {
-  const randomFortune = fortunes[Math.floor(Math.random()*fortunes.length)]
-  res.render('about', {fortune: randomFortune})
+  res.render('about', { fortune: fortune.getFortune()})
 })
 
 // custom 404 page
@@ -88,10 +92,10 @@ app.listen(port, () => console.log(
   `press Ctrl-C to terminate.`
 ))
 
-const fortunes = [
-  "Do good.",
-  "Do better.",
-  "Do your best.",
-  "Vagabond.",
-  "Yeehaw.",
-]
+// const fortunes = [
+//   "Do good.",
+//   "Do better.",
+//   "Do your best.",
+//   "Vagabond.",
+//   "Yeehaw.",
+// ]
